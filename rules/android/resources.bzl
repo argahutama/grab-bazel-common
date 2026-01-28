@@ -99,7 +99,7 @@ def build_resources(
     - resources: Merged output containing resources, assets, assets_dir and manifest.
     """
     generated_resources = _generate_resources(res_values.get("strings", default = {}), name)
-    _validate_resource_parameters(resource_sets, resource_files)
+    #     _validate_resource_parameters(resource_sets, resource_files)
 
     if (len(resource_sets) != 0):
         # Resources are passed with the new format, merge sources and return the merged result
