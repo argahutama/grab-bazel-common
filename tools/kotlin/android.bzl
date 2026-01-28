@@ -63,7 +63,16 @@ def _kt_android_artifact(
     # TODO: remove testonly check and ensure that reordering does not cause side effects
     return [kt_name, base_name] if testonly else [base_name, kt_name]
 
-def kt_android_library(name, exports = [], visibility = None, exec_properties = None, **kwargs):
+def kt_android_library(
+        name,
+        custom_package = "",
+        manifest = None,
+        resource_files = [],
+        assets = [],
+        assets_dir = None,
+        visibility = None,
+        exec_properties = None,
+        **kwargs):
     """Creates an Android sandwich library.
     `srcs`, `deps`, `plugins` are routed to `kt_jvm_library` the other android
     related attributes are handled by the native `android_library` rule.
@@ -73,7 +82,11 @@ def kt_android_library(name, exports = [], visibility = None, exec_properties = 
     # buildifier: disable=native-android
     native.android_library(
         name = name,
-        exports = exports + _kt_android_artifact(name, exec_properties = exec_properties, **kwargs),
+        custom_package = custom_package,
+        manifest = manifest,
+        resource_files = resource_files,
+        assets = assets,
+        assets_dir = assets_dir,
         visibility = visibility,
         tags = [tag for tag in kwargs.get("tags", default = []) if tag != LINT_ENABLED],
         testonly = kwargs.get("testonly", default = 0),
