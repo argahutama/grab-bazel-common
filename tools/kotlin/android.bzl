@@ -70,6 +70,7 @@ def kt_android_library(
         resource_files = [],
         assets = [],
         assets_dir = None,
+        exports = [],
         visibility = None,
         exec_properties = None,
         **kwargs):
@@ -87,6 +88,7 @@ def kt_android_library(
         resource_files = resource_files,
         assets = assets,
         assets_dir = assets_dir,
+        exports = exports + _kt_android_artifact(name, exec_properties = exec_properties, **kwargs),
         visibility = visibility,
         tags = [tag for tag in kwargs.get("tags", default = []) if tag != LINT_ENABLED],
         testonly = kwargs.get("testonly", default = 0),
